@@ -5,15 +5,9 @@ Copyright (c) 2025 VanWijdeStudio
 All rights reserved.
 
 1. You may access, view, and modify the source code of BitRacer for personal use and to create mods.
-2. You may create, distribute, and share mods (new cars, tracks, physics, UI elements) for BitRacer.
+2. You may create, distribute, and share mods (new cars, tracks, physics, UI elements) for BitRacer, paid and free.
 3. You may NOT distribute, sell, or share the full game, including all assets (graphics, sounds, music, scenes, UI) in a standalone playable form.
 4. You may NOT use the BitRacer name, branding, or assets to claim ownership of a new game.
 5. You may NOT sell BitRacer or any derivative that includes substantial parts of the original game.
 6. You must credit VanWijdeStudio as the creator of BitRacer when distributing mods or derivative content.
 7. This license does not grant permission to use assets, music, or other proprietary content outside of modding.
-
-For clarity:  
-- Code: free to read, modify, and use for mods  
-- Assets: proprietary, do not redistribute  
-- Commercial sale of the full game or derivatives: prohibited  
-- Modding: fully allowed
