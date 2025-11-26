@@ -1,0 +1,229 @@
+CORE CORNER CALLS
+
+(Usually graded from 1 = very tight to 6/7 = very fast)
+
+Left 1 / Right 1 (hairpin / very tight)
+
+Left 2 / Right 2
+
+Left 3 / Right 3
+
+Left 4 / Right 4
+
+Left 5 / Right 5
+
+Left 6 / Right 6 (fast)
+
+Left 7 / Right 7 (flat / almost straight)
+
+Flat left / Flat right
+
+Kink / Small kink
+
+Straight / 100 straight / long straight
+
+CORNER MODIFIERS
+
+Short
+
+Long
+
+Very long
+
+Tightens
+
+Tightens into
+
+Opens
+
+Opens into
+
+Double
+
+Triple
+
+Don’t cut
+
+Cut
+
+Maybe cut
+
+Square left / Square right
+
+Hairpin left / Hairpin right
+
+Acute left / Acute right
+
+COMBINATIONS & LINKS
+
+Into
+
+And
+
+Over crest into
+
+Over jump into
+
+Then
+
+Keep left / Keep right
+
+Stay middle
+
+CRESTS & JUMPS
+
+Crest
+
+Small crest
+
+Big crest
+
+Blind crest
+
+Crest into…
+
+Jump
+
+Small jump
+
+Jump maybe
+
+Dip
+
+Bump
+
+Bumpy / rough
+
+BRAKING & SPEED CALLS
+
+Brake
+
+Hard brake
+
+Slow
+
+Caution
+
+Danger
+
+Double caution
+
+Triple caution
+
+Flat out
+
+Lift
+
+SURFACE & GRIP NOTES
+
+Slippy
+
+Very slippy
+
+Ice
+
+Gravel
+
+Mud
+
+Sand
+
+Tarmac
+
+Mixed surface
+
+Water splash
+
+Shiny tarmac / low grip
+
+HAZARDS
+
+Rock inside
+
+Rock outside
+
+Tree inside / outside
+
+Post
+
+Barrier
+
+Drop
+
+Cliff
+
+Narrow
+
+Very narrow
+
+Bridge
+
+Gate
+
+House
+
+Wall
+
+Fence
+
+ROAD SHAPE FEATURES
+
+Chicane
+
+Tight chicane
+
+S-bend
+
+Hairpins sequence
+
+Switchbacks
+
+Square junction
+
+Y-junction
+
+T-junction
+
+Roundabout (rare in classic rally, but used in some events)
+
+DISTANCE CALLS
+
+You can record a few distances and reuse them procedurally.
+
+10
+
+20
+
+30
+
+50
+
+70
+
+100
+
+150
+
+200
+
+300
+
+OPTIONAL EXTRAS
+
+(Used sometimes in modern sims)
+
+Over crest keep middle
+
+Don’t over-crest
+
+Late apex / Early apex
+
+Opens long
+
+Tightens very bad
+
+Ruts
+
+Camber
+
+Off-camber
