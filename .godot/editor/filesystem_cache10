@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1764339365
+::res://::1764354933
 icon.svg::CompressedTexture2D::3326045996642002456::1763927551::1763927551::1::::<><><>0<>0<>5770c86ecaa021ace47a7a0c3d11d7c2<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 LICENSE.md::TextFile::-1::1763927551::0::1::::<><><>0<>0<><>::
 README.md::TextFile::-1::1763927551::0::1::::<><><>0<>0<><>::
@@ -65,7 +65,7 @@ tribune_full.png::CompressedTexture2D::6664791145144755688::1764016146::17643277
 tribune_overhang_red.png::CompressedTexture2D::6117453389151660958::1764016146::1764327722::1::::<><><>0<>0<>026942e2a14ec9e7d96e17b6c4cec40f<>res://.godot/imported/tribune_overhang_red.png-376bc5883e8644dd39af8d56ce1de333.ctex::
 tribune_overhang_striped.png::CompressedTexture2D::3543632370551289643::1764016146::1764327722::1::::<><><>0<>0<>3d9b2e87f5580ef6baae089558ed47f3<>res://.godot/imported/tribune_overhang_striped.png-3def76cf2a13a9d4ae816bcdfe0e1e95.ctex::
 ::res://Assets/tracks/::1764338477
-::res://Assets/tracks/tilemap/::1764339339
+::res://Assets/tracks/tilemap/::1764339365
 tilemap1.png::CompressedTexture2D::25560062586100708::1764339296::1764339365::1::::<><><>0<>0<>e53ae278318cbd3843a1fe3fdc1694e2<>res://.godot/imported/tilemap1.png-0fc2366110aa44f43b56bd6cf516068c.ctex::
 tilemap2.png::CompressedTexture2D::6444695158082544930::1764339267::1764339365::1::::<><><>0<>0<>35be78e24479f2f39a7447b4e8891ca3<>res://.godot/imported/tilemap2.png-ba1e89a352e8abbe2155955eb18775a9.ctex::
 tilemap.png::CompressedTexture2D::4297892666585658835::1764339173::1764339365::1::::<><><>0<>0<>e3f5bc54c630f41f638d2627906661da<>res://.godot/imported/tilemap.png-02aefed24126f07ee24b469bb134d915.ctex::
@@ -450,8 +450,8 @@ motorcycle_yellow.png::CompressedTexture2D::4633200647378763962::1764016146::176
 ::res://scenes/::1763928593
 ::res://scenes/player/::1764328293
 character_body_2d.tscn::PackedScene::3686397607118698102::1764328293::0::1::::<><><>0<>0<><>::uid://dmfevgxenjhvh::::res://scripts/player/Car1.gd<>uid://dj8o1yygyo7sa::::res://Assets/vehicles/cars/car_blue_1.png
-::res://scenes/track/::1764330061
-track.tscn::PackedScene::6954611410422762817::1764330061::0::1::::<><><>0<>0<><>::
+::res://scenes/track/::1764339587
+track.tscn::PackedScene::6954611410422762817::1764339587::0::1::::<><><>0<>0<><>::uid://b2h6wt6g5h0rv::::res://Assets/tracks/tilemap/tilemap.png
 ::res://scenes/ui/::1763928595
 ::res://scripts/::1763928568
 ::res://scripts/player/::1763928928

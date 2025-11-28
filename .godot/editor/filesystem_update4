@@ -1,1 +1,4 @@
 res://scenes/track/track.tscn
+res://scenes/Main/main.tscn
+res://scenes/player/character_body_2d.tscn
+res://scripts/player/Car1.gd
