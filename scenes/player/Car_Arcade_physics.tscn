@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bsryovcyh4yjm"]
 
 [ext_resource type="Script" uid="uid://dmfevgxenjhvh" path="res://scripts/player/Car1.gd" id="1_4bq1r"]
-[ext_resource type="Texture2D" uid="uid://dckpr20fj2ts0" path="res://assets/cars/CustomCar1.png" id="2_mens8"]
+[ext_resource type="Texture2D" uid="uid://dlj4o0f6auijg" path="res://assets/cars/CustomCar(Red).png" id="2_mens8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxlh8"]
 size = Vector2(30, 32)
