@@ -30,5 +30,5 @@ In the download there is a separate LICENSE file that strictly relates to the as
 
 
 CONTROLLS:
-W - Forward | S - Brake/Reverse | A - Left | D - Right | C - Change camera | E and Q - Shift up/down | C - Pit limiter
+W - Forward | S - Brake/Reverse | A - Left | D - Right | C - Change camera | E and Q - Shift up/down | X - Pit limiter
 

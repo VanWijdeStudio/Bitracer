@@ -1,15 +1,16 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1764844423
+::res://::1764856786
 icon.svg::CompressedTexture2D::3326045996642002456::1763927551::1763927551::1::::<><><>0<>0<>5770c86ecaa021ace47a7a0c3d11d7c2<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 LICENSE.md::TextFile::-1::1763927551::0::1::::<><><>0<>0<><>::
-README.md::TextFile::-1::1764795457::0::1::::<><><>0<>0<><>::
+README.md::TextFile::-1::1764846531::0::1::::<><><>0<>0<><>::
 ::res://Assets/::1764612338
-::res://Assets/cars/::1764613244
+::res://Assets/cars/::1764856772
 CustomCar(BareBones).png::CompressedTexture2D::3108143164143739912::1764612338::1764613244::1::::<><><>0<>0<>42750c35a19a2e233705804d53f5b40f<>res://.godot/imported/CustomCar(BareBones).png-6baa4472095ff51cd10cf21238608c1a.ctex::
 CustomCar(Blue).png::CompressedTexture2D::6776496864634132185::1764612338::1764613244::1::::<><><>0<>0<>732e36e862791f1cecabc636bfbe1196<>res://.godot/imported/CustomCar(Blue).png-36b389b1f3b8e375debecdbe6dfebd7d.ctex::
 CustomCar(Green).png::CompressedTexture2D::2171225733941694590::1764612338::1764613244::1::::<><><>0<>0<>9fdbf5a8a429cf3b101c0a56b33656ed<>res://.godot/imported/CustomCar(Green).png-18acbee91d379add869545aba864fad0.ctex::
 CustomCar(Red).png::CompressedTexture2D::7951705847006162840::1764612338::1764613244::1::::<><><>0<>0<>bb1430e79b51d6218c4a2ac53e0c9139<>res://.godot/imported/CustomCar(Red).png-5b7dbc1ea89d1aa500fcd2b429a7167e.ctex::
 CustomCar(VANWIJDERACING).png::CompressedTexture2D::2290768476338422858::1764613209::1764613244::1::::<><><>0<>0<>ec8c14d64341e5a8cac5f80b53fda04a<>res://.godot/imported/CustomCar(VANWIJDERACING).png-01b421891bdc98ce8dfc724692db6ddf.ctex::
+F1_CustomCar(Blue).png::CompressedTexture2D::4495355529631210431::1764856721::1764856786::1::::<><><>0<>0<>8fd75c917662630af5d9c10ff7f0a315<>res://.godot/imported/F1_CustomCar(Blue).png-fb362ee8bfd0b32c2e279660719db96b.ctex::
 ::res://Assets/Misc/::1764196022
 Rally pacenotes (to record).txt::TextFile::-1::1764196022::0::1::::<><><>0<>0<><>::
 ::res://Assets/Misc/Characters/::1764613244
@@ -456,10 +457,10 @@ motorcycle_yellow.png::CompressedTexture2D::4633200647378763962::1764016146::176
 ::res://scenes/::1764355988
 ::res://scenes/Main/::1764792393
 main.tscn::PackedScene::5393424101482324451::1764792393::0::1::::<><><>0<>0<><>::uid://dokdwqfrpu8iw::::res://scenes/player/Car_Arcade_Physics_with_rpm+gearshifts.tscn<>uid://c6c4o0r782qgn::::res://scenes/track/Coralus_Iceway.tscn<>uid://c2d4wgcvs1nwq::::res://scenes/player/Camera's.tscn
-::res://scenes/player/::1764795403
+::res://scenes/player/::1764846350
 Camera's.tscn::PackedScene::6675933678340336320::1764620094::0::1::::<><><>0<>0<><>::uid://dufy8bd5aw83a::::res://scripts/player/camera_controller.gd<>uid://be7liwcuek1sk::::res://scripts/player/car_camera_something.gd
 Car_Arcade_physics.tscn::PackedScene::3686397607118698102::1764706534::0::1::::<><><>0<>0<><>::uid://dmfevgxenjhvh::::res://scripts/player/Car1.gd<>uid://7vwvff2ej72m::::res://Assets/cars/CustomCar(VANWIJDERACING).png
-Car_Arcade_Physics_with_rpm+gearshifts.tscn::PackedScene::8162771926887457562::1764795403::0::1::::<><><>0<>0<><>::uid://5r4v2y1cbfos::::res://scripts/player/Car/Car_With_Rpm.gd<>uid://7vwvff2ej72m::::res://Assets/cars/CustomCar(VANWIJDERACING).png
+Car_Arcade_Physics_with_rpm+gearshifts.tscn::PackedScene::8162771926887457562::1764846350::0::1::::<><><>0<>0<><>::uid://5r4v2y1cbfos::::res://scripts/player/Car/Car_With_Rpm.gd<>uid://7vwvff2ej72m::::res://Assets/cars/CustomCar(VANWIJDERACING).png
 Car_Arcade_Rally_Physics.tscn::PackedScene::1835518996817798905::1764706630::0::1::::<><><>0<>0<><>::uid://lbwubq1vto2v::::res://scripts/player/Rally_physics.gd<>uid://cnyvcnk00glu1::::res://Assets/vehicles/cars/car_blue_small_4.png
 ::res://scenes/track/::1764706597
 Coralus_Iceway.tscn::PackedScene::6954611410422762817::1764616399::0::1::::<><><>0<>0<><>::uid://b2h6wt6g5h0rv::::res://Assets/tracks/tilemap/tilemap.png
@@ -469,9 +470,9 @@ Coralus_Iceway.tscn::PackedScene::6954611410422762817::1764616399::0::1::::<><><
 ::res://scripts/player/Camera/::1764706662
 camera_controller.gd::GDScript::8574877010157236332::1764620062::0::1::::<>Node2D<><>0<>0<><>::
 car_camera_something.gd::GDScript::2733919479164603238::1764619681::0::1::::<>Camera2D<><>0<>0<><>::
-::res://scripts/player/Car/::1764795405
+::res://scripts/player/Car/::1764846354
 Car1.gd::GDScript::8012130784019138373::1764616858::0::1::::<>Node2D<><>0<>0<><>::
-Car_With_Rpm.gd::GDScript::2142559481812017130::1764795405::0::1::::<>Node2D<><>0<>0<><>::
+Car_With_Rpm.gd::GDScript::2142559481812017130::1764846354::0::1::::<>Node2D<><>0<>0<><>::
 Rally_physics.gd::GDScript::775513225941744907::1764529282::0::1::::<>RigidBody2D<><>0<>0<><>::
 ::res://scripts/systems/::1763928570
 ::res://scripts/ui/::1763928560
