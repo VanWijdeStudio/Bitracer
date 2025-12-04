@@ -43,6 +43,16 @@ var velocity: Vector2 = Vector2.ZERO
 @onready var rpm_label: Label = $CanvasLayer/RPMlabel
 @onready var gear_label: Label = $CanvasLayer/GearLabel
 @onready var speed_label: Label = $CanvasLayer/SpeedLabel
+@onready var engine_sound: AudioStreamPlayer2D = $EngineSound
+
+# -----------------------------
+# Engine Sound Settings
+# -----------------------------
+@export var min_pitch: float = 0.8  # Pitch at idle RPM
+@export var max_pitch: float = 2.5  # Pitch at redline RPM
+@export var pitch_smoothing: float = 5.0  # How fast pitch changes (lower = smoother)
+var target_pitch: float = 1.0
+var current_pitch: float = 1.0
 
 # -----------------------------
 # Torque curve
@@ -235,6 +245,11 @@ func _process(delta: float) -> void:
 	# UPDATE UI
 	# -----------------------------
 	update_ui(forward_speed)
+	
+	# -----------------------------
+	# UPDATE ENGINE SOUND
+	# -----------------------------
+	update_engine_sound(delta)
 
 # -----------------------------
 # UI UPDATE
@@ -290,3 +305,29 @@ func update_ui(speed: float) -> void:
 		speed_label.text = "Speed: %d km/h" % int(kmh)
 	else:
 		print("Speed label is null in update_ui!")
+
+# -----------------------------
+# ENGINE SOUND UPDATE
+# -----------------------------
+func update_engine_sound(delta: float) -> void:
+	if !engine_sound:
+		return
+	
+	# Calculate target pitch based on RPM
+	# Map RPM (900-7800) to pitch (min_pitch - max_pitch)
+	var rpm_normalized: float = (rpm - IDLE_RPM) / (REDLINE_RPM - IDLE_RPM)
+	target_pitch = lerp(min_pitch, max_pitch, rpm_normalized)
+	
+	# Smoothly interpolate current pitch towards target
+	current_pitch = lerp(current_pitch, target_pitch, pitch_smoothing * delta)
+	
+	# Apply pitch to audio player
+	engine_sound.pitch_scale = current_pitch
+	
+	# Optional: Adjust volume based on throttle (louder when accelerating)
+	var base_volume: float = -8.0  # Base volume in dB
+	var throttle_volume_boost: float = 0.0
+	if Input.is_action_pressed("ui_up") and gear > 0:
+		throttle_volume_boost = 3.0  # +3dB when throttling
+	
+	engine_sound.volume_db = base_volume + throttle_volume_boost

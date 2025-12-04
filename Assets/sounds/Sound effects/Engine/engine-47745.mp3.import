@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bmathndj7fgi1"
+path="res://.godot/imported/engine-47745.mp3-843f39272224f4e543a445eb3a0a97b0.mp3str"
+
+[deps]
+
+source_file="res://Assets/sounds/Sound effects/Engine/engine-47745.mp3"
+dest_files=["res://.godot/imported/engine-47745.mp3-843f39272224f4e543a445eb3a0a97b0.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.4
+bpm=0.0
+beat_count=0
+bar_beats=4
