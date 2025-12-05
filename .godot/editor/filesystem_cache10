@@ -1,5 +1,6 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1764954509
+::res://::1764958673
+export_presets.cfg::TextFile::-1::1764954715::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::3326045996642002456::1763927551::1763927551::1::::<><><>0<>0<>5770c86ecaa021ace47a7a0c3d11d7c2<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 LICENSE.md::TextFile::-1::1763927551::0::1::::<><><>0<>0<><>::
 README.md::TextFile::-1::1764857004::0::1::::<><><>0<>0<><>::
@@ -78,7 +79,8 @@ tribune_overhang_striped.png::CompressedTexture2D::3543632370551289643::17640161
 engine-6000.mp3::AudioStreamMP3::2081548954521887303::1764857624::1764927830::1::::<><><>0<>0<>2aa9564852e041d6e56bcede260a81d2<>res://.godot/imported/engine-6000.mp3-7dc40393752dd184230bf61a0a1b9f1b.mp3str::
 engine-47745.mp3::AudioStreamMP3::3229853618659237194::1764857637::1764927830::1::::<><><>0<>0<>75446e50fd7f424ea1a3f51ee139611f<>res://.godot/imported/engine-47745.mp3-843f39272224f4e543a445eb3a0a97b0.mp3str::
 ::res://Assets/tracks/::1764338477
-::res://Assets/tracks/tilemap/::1764613244
+::res://Assets/tracks/tilemap/::1764958652
+Decor.png::CompressedTexture2D::1126739629788510545::1764958612::1764958673::1::::<><><>0<>0<>dd21127e9a1675d9264f6d349863d6eb<>res://.godot/imported/Decor.png-9c2c747301ff26f1933dcd21e05eb38c.ctex::
 tilemap1.png::CompressedTexture2D::25560062586100708::1764339296::1764613244::1::::<><><>0<>0<>e53ae278318cbd3843a1fe3fdc1694e2<>res://.godot/imported/tilemap1.png-0fc2366110aa44f43b56bd6cf516068c.ctex::
 tilemap2.png::CompressedTexture2D::6444695158082544930::1764339267::1764613244::1::::<><><>0<>0<>35be78e24479f2f39a7447b4e8891ca3<>res://.godot/imported/tilemap2.png-ba1e89a352e8abbe2155955eb18775a9.ctex::
 tilemap.png::CompressedTexture2D::4297892666585658835::1764339173::1764613244::1::::<><><>0<>0<>e3f5bc54c630f41f638d2627906661da<>res://.godot/imported/tilemap.png-02aefed24126f07ee24b469bb134d915.ctex::
@@ -470,8 +472,8 @@ Camera's.tscn::PackedScene::6675933678340336320::1764620094::0::1::::<><><>0<>0<
 Car_Arcade_physics.tscn::PackedScene::3686397607118698102::1764706534::0::1::::<><><>0<>0<><>::uid://dmfevgxenjhvh::::res://scripts/player/Car1.gd<>uid://7vwvff2ej72m::::res://Assets/cars/CustomCar(VANWIJDERACING).png
 Car_Arcade_Physics_with_rpm+gearshifts.tscn::PackedScene::8162771926887457562::1764943848::0::1::::<><><>0<>0<><>::uid://5r4v2y1cbfos::::res://scripts/player/Car/Car_With_Rpm.gd<>uid://7vwvff2ej72m::::res://Assets/cars/CustomCar(VANWIJDERACING).png<>uid://bmathndj7fgi1::::res://Assets/sounds/Sound effects/Engine/engine-47745.mp3<>uid://bt7bwpk5kweam::::res://Assets/ui/fonts/PressStart2P-Regular.ttf
 Car_Arcade_Rally_Physics.tscn::PackedScene::1835518996817798905::1764706630::0::1::::<><><>0<>0<><>::uid://lbwubq1vto2v::::res://scripts/player/Rally_physics.gd<>uid://cnyvcnk00glu1::::res://Assets/vehicles/cars/car_blue_small_4.png
-::res://scenes/track/::1764862451
-Coralus_Iceway.tscn::PackedScene::6954611410422762817::1764862451::0::1::::<><><>0<>0<><>::uid://b2h6wt6g5h0rv::::res://Assets/tracks/tilemap/tilemap.png
+::res://scenes/track/::1764958403
+Coralus_Iceway.tscn::PackedScene::6954611410422762817::1764958403::0::1::::<><><>0<>0<><>::uid://xmjonnkqiocr::::res://Assets/tracks/Tiles/Grass/land_grass11.png<>uid://b2h6wt6g5h0rv::::res://Assets/tracks/tilemap/tilemap.png
 ::res://scenes/ui/::1763928595
 ::res://scripts/::1763928568
 ::res://scripts/player/::1764706673

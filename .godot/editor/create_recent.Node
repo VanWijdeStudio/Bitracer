@@ -1,3 +1,4 @@
+TileMap
 VBoxContainer
 Control
 AudioStreamPlayer2D
@@ -9,6 +10,5 @@ CharacterBody2D
 Camera2D
 Node2D
 RigidBody2D
-TileMap
 Area2D
 StaticBody2D

@@ -17,6 +17,7 @@ rotation = 1.5707964
 [node name="Car_With_RPM" parent="." instance=ExtResource("2_8gcrf")]
 position = Vector2(746, 75)
 rotation = 1.5707964
+platform_wall_layers = 4294967295
 
 [node name="Camera\'s" parent="Car_With_RPM" instance=ExtResource("3_px18m")]
 position = Vector2(-8.34465e-07, 0)
