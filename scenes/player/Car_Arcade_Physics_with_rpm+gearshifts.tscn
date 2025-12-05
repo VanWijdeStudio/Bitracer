@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dokdwqfrpu8iw"]
+[gd_scene load_steps=6 format=3 uid="uid://dokdwqfrpu8iw"]
 
 [ext_resource type="Script" uid="uid://5r4v2y1cbfos" path="res://scripts/player/Car/Car_With_Rpm.gd" id="1_8nq6u"]
 [ext_resource type="Texture2D" uid="uid://7vwvff2ej72m" path="res://Assets/cars/CustomCar(VANWIJDERACING).png" id="2_xhxa3"]
 [ext_resource type="AudioStream" uid="uid://bmathndj7fgi1" path="res://Assets/sounds/Sound effects/Engine/engine-47745.mp3" id="3_b2gg3"]
+[ext_resource type="FontFile" uid="uid://bt7bwpk5kweam" path="res://Assets/ui/fonts/PressStart2P-Regular.ttf" id="3_vg5ro"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2gg3"]
 size = Vector2(30, 32)
@@ -19,26 +20,49 @@ texture = ExtResource("2_xhxa3")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 7
 
-[node name="SpeedLabel" type="Label" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -109.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="GearLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vg5ro")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="RPMlabel" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vg5ro")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
 unique_name_in_owner = true
 z_as_relative = false
-offset_top = 16.0
-offset_right = 40.0
-offset_bottom = 71.0
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vg5ro")
 theme_override_font_sizes/font_size = 40
-
-[node name="GearLabel" type="Label" parent="CanvasLayer"]
-unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 23.0
 horizontal_alignment = 1
-
-[node name="RPMlabel" type="Label" parent="CanvasLayer"]
-unique_name_in_owner = true
-offset_left = 152.0
-offset_right = 192.0
-offset_bottom = 23.0
-horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

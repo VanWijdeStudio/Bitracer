@@ -29,7 +29,7 @@ var gear_ratios: Dictionary = {
 # -----------------------------
 # Car handling
 # -----------------------------
-@export var wheel_scale: float = 0.07  # DOUBLED from 0.035 for higher top speeds
+@export var wheel_scale: float = 0.0525  # Reduced from 0.07 (75% of original for lower top speed)
 @export var friction: float = 150.0  # Reduced from 500.0 for more coasting
 @export var max_turn_speed: float = 180.0   # deg/sec at low speed
 @export var min_turn_speed: float = 120.0   # deg/sec at high speed
@@ -40,9 +40,9 @@ var velocity: Vector2 = Vector2.ZERO
 # -----------------------------
 # UI References
 # -----------------------------
-@onready var rpm_label: Label = $CanvasLayer/RPMlabel
-@onready var gear_label: Label = $CanvasLayer/GearLabel
-@onready var speed_label: Label = $CanvasLayer/SpeedLabel
+@onready var rpm_label: Label = $CanvasLayer/Control/VBoxContainer/RPMlabel
+@onready var gear_label: Label = $CanvasLayer/Control/VBoxContainer/GearLabel
+@onready var speed_label: Label = $CanvasLayer/Control/VBoxContainer/SpeedLabel
 @onready var engine_sound: AudioStreamPlayer2D = $EngineSound
 
 # -----------------------------
@@ -164,7 +164,7 @@ func _process(delta: float) -> void:
 	# ENGINE FORCE (based on torque and gear)
 	# -----------------------------
 	var torque: float = get_torque(rpm)
-	var engine_force: float = torque * abs(ratio) * 150.0
+	var engine_force: float = torque * abs(ratio) * 75.0  # Halved from 150.0
 	
 	# -----------------------------
 	# ACCELERATION & BRAKING
@@ -269,7 +269,7 @@ func _ready() -> void:
 
 func update_ui(speed: float) -> void:
 	if rpm_label:
-		rpm_label.text = "RPM: %d" % int(rpm)
+		rpm_label.text = "%d" % int(rpm)
 		# Color code RPM (green -> yellow -> red)
 		if rpm < 5000.0:
 			rpm_label.modulate = Color.GREEN
@@ -295,14 +295,14 @@ func update_ui(speed: float) -> void:
 		else:
 			gear_text = str(gear)
 			gear_label.modulate = Color.WHITE
-		gear_label.text = "Gear: %s" % gear_text
+		gear_label.text = "%s" % gear_text
 	else:
 		print("Gear label is null in update_ui!")
 	
 	if speed_label:
 		# Convert speed to km/h (multiply by arbitrary factor for gameplay feel)
 		var kmh: float = abs(speed) * 0.5  # Adjust multiplier to taste
-		speed_label.text = "Speed: %d km/h" % int(kmh)
+		speed_label.text = "%d km/h" % int(kmh)
 	else:
 		print("Speed label is null in update_ui!")
 
