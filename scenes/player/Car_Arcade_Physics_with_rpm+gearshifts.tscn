@@ -8,10 +8,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2gg3"]
 size = Vector2(30, 32)
 
-[node name="Car_With_RPM" type="CharacterBody2D"]
+[node name="Car_With_RPM" type="Node2D"]
 script = ExtResource("1_8nq6u")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_b2gg3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

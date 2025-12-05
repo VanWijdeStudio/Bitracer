@@ -1,3 +1,7 @@
+Area2D
+Node2D
+CharacterBody2D
+RigidBody2D
 TileMap
 VBoxContainer
 Control
@@ -6,9 +10,5 @@ CanvasLayer
 Label
 Sprite2D
 CollisionShape2D
-CharacterBody2D
 Camera2D
-Node2D
-RigidBody2D
-Area2D
 StaticBody2D
