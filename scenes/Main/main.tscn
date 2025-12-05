@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://c6c4o0r782qgn" path="res://scenes/track/Coralus_Iceway.tscn" id="2_px18m"]
 [ext_resource type="PackedScene" uid="uid://c2d4wgcvs1nwq" path="res://scenes/player/Camera's.tscn" id="3_px18m"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Scene collection" type="Node2D"]
 
-[node name="node2d" parent="." instance=ExtResource("2_px18m")]
+[node name="Coralus Iceway" parent="." instance=ExtResource("2_px18m")]
 position = Vector2(2, -6)
 
 [node name="Car_Angle_correction" type="Node2D" parent="."]
