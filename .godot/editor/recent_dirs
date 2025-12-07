@@ -1,7 +1,8 @@
+res://scripts/ui
+res://scenes/Main
 res://Assets/ui/fonts
 res://Assets/cars
 res://scenes/player
 res://scripts/player/Car
 res://scripts/player
-res://scenes/Main
 res://scenes/track
