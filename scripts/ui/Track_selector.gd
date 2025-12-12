@@ -1,30 +1,98 @@
 extends Control
 
-const TRACKS := [
-	{"name": "Coralus Iceway", "path": "res://scenes/Main/Coralus_Iceway+Car.tscn"},
+# Official tracks
+const OFFICIAL_TRACKS := [
+	{"name": "Coralus Iceway", "path": "res://scenes/Main/Coralus_Iceway+Car.tscn"}
 ]
 
+# Folder to auto-scan for modded tracks
+const MOD_TRACK_FOLDER := "res://mods/tracks/"
+
+var official_tracks := []
+var mod_tracks := []
+var current_mode := ""  # "official" or "mods"
 var current_index := 0
+var in_mode_select := true
 
 @onready var track_label = $Panel/VBoxContainer/TrackLabel
 @onready var sfx_player: AudioStreamPlayer = $SFXPlayer
 
 func _ready():
+	_load_tracks()
 	$Panel/VBoxContainer/HBoxContainer/BtnPrev.pressed.connect(_cycle.bind(-1))
 	$Panel/VBoxContainer/HBoxContainer/BtnNext.pressed.connect(_cycle.bind(1))
-	$Panel/VBoxContainer/BtnPlay.pressed.connect(_play)
-	_update_label()
+	$Panel/VBoxContainer/BtnPlay.pressed.connect(_on_select)
+	_update_ui()
+
+func _load_tracks():
+	# Load official tracks
+	official_tracks = OFFICIAL_TRACKS.duplicate()
+	
+	# Auto-scan mods folder for modded tracks
+	var dir = DirAccess.open(MOD_TRACK_FOLDER)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		
+		while file_name != "":
+			if !dir.current_is_dir() and file_name.ends_with(".tscn"):
+				var track_path = MOD_TRACK_FOLDER + file_name
+				var display_name = file_name.replace(".tscn", "").replace("_", " ").replace("+", " ")
+				mod_tracks.append({"name": display_name, "path": track_path})
+			
+			file_name = dir.get_next()
+		
+		dir.list_dir_end()
+	
+	# Auto-skip mode selection if no mods exist
+	if mod_tracks.size() == 0:
+		current_mode = "official"
+		in_mode_select = false
+
+func _get_current_tracks() -> Array:
+	return official_tracks if current_mode == "official" else mod_tracks
 
 func _cycle(dir: int):
-	current_index = (current_index + dir + TRACKS.size()) % TRACKS.size()
-	_update_label()
+	if in_mode_select:
+		# Cycle between Official and Mods
+		current_index = (current_index + dir + 2) % 2
+	else:
+		# Cycle between tracks
+		var tracks = _get_current_tracks()
+		if tracks.size() == 0:
+			return
+		current_index = (current_index + dir + tracks.size()) % tracks.size()
+	_update_ui()
 
-func _update_label():
-	track_label.text = TRACKS[current_index]["name"]
+func _on_select():
+	if in_mode_select:
+		# Player selected a mode
+		current_mode = "official" if current_index == 0 else "mods"
+		in_mode_select = false
+		current_index = 0
+		_update_ui()
+	else:
+		# Player selected a track - start race
+		var tracks = _get_current_tracks()
+		if tracks.size() == 0:
+			return
+		sfx_player.play()
+		get_tree().change_scene_to_file(tracks[current_index]["path"])
 
-func _play():
-	sfx_player.play()
-	get_tree().change_scene_to_file(TRACKS[current_index]["path"])
+func _update_ui():
+	if in_mode_select:
+		# Show mode selection
+		track_label.text = "Official Tracks" if current_index == 0 else "Modded Tracks"
+		$Panel/VBoxContainer/BtnPlay.text = "Select"
+	else:
+		# Show track selection
+		var tracks = _get_current_tracks()
+		if tracks.size() > 0:
+			track_label.text = tracks[current_index]["name"]
+		else:
+			track_label.text = "No tracks available"
+		$Panel/VBoxContainer/BtnPlay.text = "Race"
 
 func get_selected_track_path() -> String:
-	return TRACKS[current_index]["path"]
+	var tracks = _get_current_tracks()
+	return tracks[current_index]["path"] if tracks.size() > 0 else ""
