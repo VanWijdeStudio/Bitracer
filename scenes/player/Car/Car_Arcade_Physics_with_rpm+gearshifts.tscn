@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dokdwqfrpu8iw"]
+[gd_scene load_steps=8 format=3 uid="uid://dokdwqfrpu8iw"]
 
 [ext_resource type="Script" uid="uid://5r4v2y1cbfos" path="res://scripts/player/Car/Car_With_Rpm.gd" id="1_8nq6u"]
 [ext_resource type="Texture2D" uid="uid://7vwvff2ej72m" path="res://Assets/cars/CustomCar(VANWIJDERACING).png" id="2_xhxa3"]
 [ext_resource type="AudioStream" uid="uid://bmathndj7fgi1" path="res://Assets/sounds/Sound effects/Engine/engine-47745.mp3" id="3_b2gg3"]
 [ext_resource type="FontFile" uid="uid://bt7bwpk5kweam" path="res://Assets/ui/fonts/PressStart2P-Regular.ttf" id="3_vg5ro"]
+[ext_resource type="PackedScene" uid="uid://c2d4wgcvs1nwq" path="res://scenes/player/Camera's.tscn" id="5_ddl2e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2gg3"]
 size = Vector2(30, 32)
@@ -78,3 +79,5 @@ parameters/looping = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_vg5ro")
+
+[node name="Camera\'s" parent="." instance=ExtResource("5_ddl2e")]
