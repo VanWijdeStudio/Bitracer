@@ -74,10 +74,14 @@ func _on_select():
 		current_index = 0
 		_update_ui()
 	else:
-		# Player selected a track - start race
+		# Player selected a track - store it and start race
 		var tracks = _get_current_tracks()
 		if tracks.size() == 0:
 			return
+		
+		# Store selected track path in GameGlobals
+		GameGlobals.selected_track_path = tracks[current_index]["path"]
+		
 		sfx_player.play()
 		get_tree().change_scene_to_file(tracks[current_index]["path"])
 

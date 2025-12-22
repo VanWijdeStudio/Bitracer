@@ -1,4 +1,6 @@
-res://scenes/track/Track+Car/Coralus_Iceway+SELECTOR.tscn
+res://scripts/ui/CarSelector.gd
+res://scripts/systems/GameGlobals.gd
+res://scripts/systems/Car_Spawner.gd
 res://scripts/ui/Track_selector.gd
-res://scenes/track/Track+Car/GrassLandsTrailLONG+SELECTOR.tscn
-res://scenes/track/Track+Car/GrassLandsTrailSHORT+SELECTOR.tscn
+res://scenes/Main/CarSelector.tscn
+res://scenes/player/Car/Car_Arcade_Rally_Physics.tscn

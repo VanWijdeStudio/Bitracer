@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://1fey2sk64sa0"]
+[gd_scene load_steps=5 format=3 uid="uid://1fey2sk64sa0"]
 
-[ext_resource type="Script" uid="uid://lbwubq1vto2v" path="res://scripts/player/Rally_physics.gd" id="1_23y0a"]
+[ext_resource type="Script" uid="uid://lbwubq1vto2v" path="res://scripts/player/Car/Rally_physics.gd" id="1_23y0a"]
 [ext_resource type="Texture2D" uid="uid://cnyvcnk00glu1" path="res://Assets/vehicles/cars/car_blue_small_4.png" id="2_m1l57"]
+[ext_resource type="PackedScene" uid="uid://c2d4wgcvs1nwq" path="res://scenes/player/Camera's.tscn" id="3_4tqho"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxlh8"]
 size = Vector2(30, 32)
@@ -15,3 +16,5 @@ texture = ExtResource("2_m1l57")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lxlh8")
+
+[node name="Camera\'s" parent="." instance=ExtResource("3_4tqho")]
