@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1766412673
+::res://::1766413877
 export_presets.cfg::TextFile::-1::1765558633::0::1::::<><><>0<>0<><>::
 Icon.svg::CompressedTexture2D::8107707766876378206::1765746199::1765826715::1::::<><><>0<>0<>211035967000fd77194f98a753c83990<>res://.godot/imported/Icon.svg-209197100d5fe6cba9c168636c60b76c.ctex::
 LICENSE.md::TextFile::-1::1763927551::0::1::::<><><>0<>0<><>::
@@ -572,15 +572,15 @@ PLACEHOLDER.txt::TextFile::-1::1765566605::0::1::::<><><>0<>0<><>::
 ::res://mods/Tracks/::1765566599
 PLACEHOLDER.txt::TextFile::-1::1765566594::0::1::::<><><>0<>0<><>::
 ::res://scenes/::1764355988
-::res://scenes/Main/::1766412689
+::res://scenes/Main/::1766412747
 CarSelector.tscn::PackedScene::4545853033448446828::1766412689::0::1::::<><><>0<>0<><>::uid://cqoklcoq5jhv2::::res://scripts/ui/CarSelector.gd<>uid://bt7bwpk5kweam::::res://Assets/ui/fonts/PressStart2P-Regular.ttf<>uid://bot2bc08es4ir::::res://Assets/sounds/Sound effects/UI/confirmation_004.ogg
-track_selector.tscn::PackedScene::9175210705779206662::1765187866::0::1::::<><><>0<>0<><>::uid://4e65kxontn7c::::res://scripts/ui/Track_selector.gd<>uid://bt7bwpk5kweam::::res://Assets/ui/fonts/PressStart2P-Regular.ttf<>uid://bot2bc08es4ir::::res://Assets/sounds/Sound effects/UI/confirmation_004.ogg
+TrackSelector.tscn::PackedScene::9175210705779206662::1765187866::0::1::::<><><>0<>0<><>::uid://4e65kxontn7c::::res://scripts/ui/Track_selector.gd<>uid://bt7bwpk5kweam::::res://Assets/ui/fonts/PressStart2P-Regular.ttf<>uid://bot2bc08es4ir::::res://Assets/sounds/Sound effects/UI/confirmation_004.ogg
 ::res://scenes/player/::1765568952
 Camera's.tscn::PackedScene::6675933678340336320::1764620094::0::1::::<><><>0<>0<><>::uid://dufy8bd5aw83a::::res://scripts/player/camera_controller.gd<>uid://be7liwcuek1sk::::res://scripts/player/car_camera_something.gd
-::res://scenes/player/Car/::1765745546
+::res://scenes/player/Car/::1766412906
 Car_Arcade_physics.tscn::PackedScene::3686397607118698102::1764706534::0::1::::<><><>0<>0<><>::uid://dmfevgxenjhvh::::res://scripts/player/Car1.gd<>uid://7vwvff2ej72m::::res://Assets/cars/CustomCar(VANWIJDERACING).png
 Car_Arcade_Physics_with_rpm+gearshifts.tscn::PackedScene::8162771926887457562::1765745546::0::1::::<><><>0<>0<><>::uid://5r4v2y1cbfos::::res://scripts/player/Car/Car_With_Rpm.gd<>uid://7vwvff2ej72m::::res://Assets/cars/CustomCar(VANWIJDERACING).png<>uid://bmathndj7fgi1::::res://Assets/sounds/Sound effects/Engine/engine-47745.mp3<>uid://bt7bwpk5kweam::::res://Assets/ui/fonts/PressStart2P-Regular.ttf<>uid://c2d4wgcvs1nwq::::res://scenes/player/Camera's.tscn
-Car_Arcade_Rally_Physics.tscn::PackedScene::1835518996817798905::1764706630::0::1::::<><><>0<>0<><>::uid://lbwubq1vto2v::::res://scripts/player/Rally_physics.gd<>uid://cnyvcnk00glu1::::res://Assets/vehicles/cars/car_blue_small_4.png
+Car_Arcade_Rally_Physics.tscn::PackedScene::1835518996817798905::1766412906::0::1::::<><><>0<>0<><>::uid://lbwubq1vto2v::::res://scripts/player/Car/Rally_physics.gd<>uid://cnyvcnk00glu1::::res://Assets/vehicles/cars/car_blue_small_4.png<>uid://c2d4wgcvs1nwq::::res://scenes/player/Camera's.tscn
 ::res://scenes/track/::1765568908
 ::res://scenes/track/Raw track/::1766354934
 Coralus_Iceway.tscn::PackedScene::6954611410422762817::1765543315::0::1::::<><><>0<>0<><>::uid://xmjonnkqiocr::::res://Assets/tracks/Tiles/Grass/land_grass11.png<>uid://b2h6wt6g5h0rv::::res://Assets/tracks/tilemap/tilemap.png<>uid://dvo1k1x8hyvei::::res://Assets/tracks/tilemap/Decor_but_better.png<>uid://3enn8xkjl6u6::::res://scripts/systems/LapTracker.gd
@@ -604,9 +604,9 @@ Car_With_Rpm.gd::GDScript::2142559481812017130::1765544188::0::1::::<>StaticBody
 Rally_physics.gd::GDScript::775513225941744907::1764529282::0::1::::<>RigidBody2D<><>0<>0<><>::
 ::res://scripts/systems/::1766412623
 Car_Spawner.gd::GDScript::5956815646080258736::1766412623::0::1::::<>Node2D<><>0<>0<><>::
-LapTracker.gd::GDScript::1974359438375780011::1765225321::0::1::::<>Area2D<><>0<>0<><>::
 GameGlobals.gd::GDScript::850091141252086314::1766412511::0::1::::<>Node<><>0<>0<><>::
-::res://scripts/ui/::1766412653
+LapTracker.gd::GDScript::1974359438375780011::1765225321::0::1::::<>Area2D<><>0<>0<><>::
+::res://scripts/ui/::1766412986
+CarSelector.gd::GDScript::5925391095253557161::1766412986::0::1::::<>Control<><>0<>0<><>::
 LapTimerUI.gd::GDScript::3952084060139117559::1765224275::0::1::::<>CanvasLayer<><>0<>0<><>::
-CarSelector.gd::GDScript::5925391095253557161::1766412625::0::1::::<>Control<><>0<>0<><>::
 Track_selector.gd::GDScript::2045670338530319710::1766412653::0::1::::<>Control<><>0<>0<><>::

@@ -1,6 +1,3 @@
 res://scripts/ui/CarSelector.gd
-res://scripts/systems/GameGlobals.gd
-res://scripts/systems/Car_Spawner.gd
-res://scripts/ui/Track_selector.gd
 res://scenes/Main/CarSelector.tscn
-res://scenes/player/Car/Car_Arcade_Rally_Physics.tscn
+res://scripts/systems/LapTracker.gd

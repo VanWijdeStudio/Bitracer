@@ -1,27 +1,33 @@
 extends Control
 
-# Car definitions - add more as needed
+# Car definitions with categories
 const CARS := [
+	# GT3 Cars
 	{
-		"name": "VanWijde Racing car",
+		"category": "Single seater Custom",
+		"name": "Default Car",
 		"path": "res://scenes/player/Car/Car_Arcade_Physics_with_rpm+gearshifts.tscn",
-		"description": "Default Car",
+		"description": "What can i say? Its the default car"
 	},
 	{
-		 "name": "Rally test Car",
+		"category": "Rally",
+		"name": "Rally",
 		"path": "res://scenes/player/Car/Car_Arcade_Rally_Physics.tscn",
-		 "description": "This fucker is terrible"
-	 },
+		"description": "This fucker is quite shit"
+	},
 ]
 
 # Folder to auto-scan for modded cars
-const MOD_CAR_FOLDER := "res://mods/cars/"
+const MOD_CAR_FOLDER := "res://mods/Cars/"
 
-var official_cars := []
-var mod_cars := []
-var current_mode := ""  # "official" or "mods"
-var current_index := 0
-var in_mode_select := true
+var categories := {}  # Dictionary: category_name -> [cars]
+var category_names := []  # List of category names in order
+var mod_cars := []  # List of modded cars (no subcategories)
+
+var current_selection_level := 0  # 0 = category, 1 = car within category
+var current_category_index := 0
+var current_car_index := 0
+var selected_category := ""
 
 @onready var car_label = $Panel/VBoxContainer/CarLabel
 @onready var description_label = $Panel/VBoxContainer/DescriptionLabel
@@ -32,11 +38,19 @@ func _ready():
 	$Panel/VBoxContainer/HBoxContainer/BtnPrev.pressed.connect(_cycle.bind(-1))
 	$Panel/VBoxContainer/HBoxContainer/BtnNext.pressed.connect(_cycle.bind(1))
 	$Panel/VBoxContainer/BtnSelect.pressed.connect(_on_select)
+	$Panel/VBoxContainer/BtnBack.pressed.connect(_on_back)
 	_update_ui()
 
 func _load_cars():
-	# Load official cars
-	official_cars = CARS.duplicate()
+	# Organize official cars by category
+	for car in CARS:
+		var category = car.get("category", "Uncategorized")
+		
+		if not categories.has(category):
+			categories[category] = []
+			category_names.append(category)
+		
+		categories[category].append(car)
 	
 	# Auto-scan mods folder for modded cars
 	var dir = DirAccess.open(MOD_CAR_FOLDER)
@@ -58,69 +72,82 @@ func _load_cars():
 		
 		dir.list_dir_end()
 	
-	# Auto-skip mode selection if no mods exist
-	if mod_cars.size() == 0:
-		current_mode = "official"
-		in_mode_select = false
-
-func _get_current_cars() -> Array:
-	return official_cars if current_mode == "official" else mod_cars
+	# Add "Mods" category if modded cars exist
+	if mod_cars.size() > 0:
+		categories["Mods"] = mod_cars
+		category_names.append("Mods")
 
 func _cycle(dir: int):
-	if in_mode_select:
-		# Cycle between Official and Mods
-		current_index = (current_index + dir + 2) % 2
+	if current_selection_level == 0:
+		# Cycling through categories
+		current_category_index = (current_category_index + dir + category_names.size()) % category_names.size()
+		current_car_index = 0  # Reset car index when changing category
 	else:
-		# Cycle between cars
-		var cars = _get_current_cars()
-		if cars.size() == 0:
-			return
-		current_index = (current_index + dir + cars.size()) % cars.size()
+		# Cycling through cars within selected category
+		var cars_in_category = categories[selected_category]
+		current_car_index = (current_car_index + dir + cars_in_category.size()) % cars_in_category.size()
+	
 	_update_ui()
 
 func _on_select():
-	if in_mode_select:
-		# Player selected a mode
-		current_mode = "official" if current_index == 0 else "mods"
-		in_mode_select = false
-		current_index = 0
+	if current_selection_level == 0:
+		# Player selected a category - move to car selection
+		selected_category = category_names[current_category_index]
+		current_selection_level = 1
+		current_car_index = 0
 		_update_ui()
 	else:
-		# Player selected a car - save it globally and proceed
-		var cars = _get_current_cars()
-		if cars.size() == 0:
-			return
+		# Player selected a car - save it and proceed
+		var cars_in_category = categories[selected_category]
+		var selected_car = cars_in_category[current_car_index]
 		
-		# Store selected car path in a global/autoload
-		GameGlobals.selected_car_path = cars[current_index]["path"]
+		# Store selected car path in GameGlobals
+		GameGlobals.selected_car_path = selected_car["path"]
 		
 		if sfx_player:
 			sfx_player.play()
 		
-		# Proceed to track selector or next screen
+		# Proceed to track selector
 		_proceed_to_track_selector()
+
+func _on_back():
+	if current_selection_level == 1:
+		# Go back to category selection
+		current_selection_level = 0
+		_update_ui()
+	else:
+		# Go back to main menu or previous screen
+		get_tree().change_scene_to_file("res://scenes/Main/MainMenu.tscn")
 
 func _proceed_to_track_selector():
 	# Change to track selector scene
 	get_tree().change_scene_to_file("res://scenes/Main/TrackSelector.tscn")
 
 func _update_ui():
-	if in_mode_select:
-		# Show mode selection
-		car_label.text = "Official Cars" if current_index == 0 else "Modded Cars"
-		description_label.text = "Select car source"
-		$Panel/VBoxContainer/BtnSelect.text = "Select"
+	# Update back button visibility
+	$Panel/VBoxContainer/BtnBack.visible = true
+	
+	if current_selection_level == 0:
+		# Show category selection
+		var category = category_names[current_category_index]
+		var car_count = categories[category].size()
+		
+		car_label.text = category
+		description_label.text = str(car_count) + (" car" if car_count == 1 else " cars") + " in this category"
+		$Panel/VBoxContainer/BtnSelect.text = "Select Category"
+		$Panel/VBoxContainer/Title.text = "SELECT CATEGORY"
 	else:
-		# Show car selection
-		var cars = _get_current_cars()
-		if cars.size() > 0:
-			car_label.text = cars[current_index]["name"]
-			description_label.text = cars[current_index].get("description", "")
-		else:
-			car_label.text = "No cars available"
-			description_label.text = ""
-		$Panel/VBoxContainer/BtnSelect.text = "Confirm"
+		# Show car selection within category
+		var cars_in_category = categories[selected_category]
+		var selected_car = cars_in_category[current_car_index]
+		
+		car_label.text = selected_car["name"]
+		description_label.text = selected_car.get("description", "")
+		$Panel/VBoxContainer/BtnSelect.text = "Confirm Car"
+		$Panel/VBoxContainer/Title.text = "SELECT CAR - " + selected_category
 
 func get_selected_car_path() -> String:
-	var cars = _get_current_cars()
-	return cars[current_index]["path"] if cars.size() > 0 else ""
+	if current_selection_level == 1 and selected_category != "":
+		var cars_in_category = categories[selected_category]
+		return cars_in_category[current_car_index]["path"]
+	return ""

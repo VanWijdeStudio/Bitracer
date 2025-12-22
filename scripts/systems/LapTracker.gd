@@ -15,6 +15,9 @@ var lap_in_progress: bool = false
 # Track which checkpoint we last touched to prevent double triggers
 var last_checkpoint_touched: String = ""
 
+# Store reference to the car for consistent detection
+var detected_car = null
+
 func _ready() -> void:
 	# Connect signals for Area2D entering (not Body2D)
 	area_entered.connect(_on_area_entered)
@@ -34,10 +37,34 @@ func _ready() -> void:
 func _on_area_entered(area) -> void:
 	print("Area entered detection: ", area.name, " (parent: ", area.get_parent().name, ")")
 	
-	# Check if it's the car's detection area
+	# Get the car node (parent of the detection area)
 	var car_node = area.get_parent()
-	if car_node.name != "Car":
+	
+	# Check if this is a car by looking for common car characteristics
+	# Option 1: Check if it has a Camera2D (most cars do)
+	# Option 2: Check if it's in a "car" group
+	# Option 3: Check if parent name contains "Car" or "car"
+	
+	var is_car = false
+	
+	# Method 1: Check for Camera2D child
+	if car_node.has_node("Camera2D"):
+		is_car = true
+	
+	# Method 2: Check if in "car" or "player" group
+	if car_node.is_in_group("car") or car_node.is_in_group("player"):
+		is_car = true
+	
+	# Method 3: Check name contains "car" (case insensitive)
+	if "car" in car_node.name.to_lower():
+		is_car = true
+	
+	# If none of the above, it's probably not a car
+	if not is_car:
 		return
+	
+	# Store the car reference
+	detected_car = car_node
 	
 	# Determine which checkpoint was crossed based on distance
 	var body_pos: Vector2 = car_node.global_position
@@ -61,7 +88,7 @@ func _on_area_entered(area) -> void:
 
 func _on_area_exited(area) -> void:
 	var car_node = area.get_parent()
-	if car_node.name == "Car":
+	if car_node == detected_car:
 		last_checkpoint_touched = ""
 
 func _on_start_line_crossed() -> void:
