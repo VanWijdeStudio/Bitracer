@@ -19,11 +19,21 @@ var session_active := false
 var spawn_ready := false
 var players_spawned := {}  # peer_id -> bool
 
+# Periodic sync timer
+var sync_timer := 0.0
+const SYNC_INTERVAL := 0.5  # Sync player list every 0.5 seconds
+
+# Connection timeout
+var connection_timeout := 0.0
+const CONNECTION_TIMEOUT_DURATION := 10.0  # 10 seconds to connect
+var is_connecting := false
+
 # Signals
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected()
 signal all_players_spawned()
+signal connection_failed()
 
 func _ready():
 	# CRITICAL: Don't destroy this node when changing scenes
@@ -34,6 +44,23 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+
+func _process(delta):
+	# Server periodically syncs player list to all clients
+	if is_server() and session_active:
+		sync_timer += delta
+		if sync_timer >= SYNC_INTERVAL:
+			sync_timer = 0.0
+			# Broadcast current player list to all clients
+			sync_players.rpc(players)
+	
+	# Track connection timeout
+	if is_connecting:
+		connection_timeout += delta
+		if connection_timeout >= CONNECTION_TIMEOUT_DURATION:
+			print("Connection timeout!")
+			_on_connection_failed()
+			is_connecting = false
 
 # HOST GAME
 func host_game(host_name: String, port: int = DEFAULT_PORT) -> bool:
@@ -63,11 +90,20 @@ func host_game(host_name: String, port: int = DEFAULT_PORT) -> bool:
 
 # JOIN GAME
 func join_game(client_name: String, address: String, port: int = DEFAULT_PORT) -> bool:
+	print("Attempting to connect to ", address, ":", port)
+	
+	# Temporarily suppress error spam from invalid addresses
+	var original_print_error_messages = ProjectSettings.get_setting("debug/settings/stdout/print_error_messages")
+	ProjectSettings.set_setting("debug/settings/stdout/print_error_messages", false)
+	
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, port)
 	
+	# Restore error output
+	ProjectSettings.set_setting("debug/settings/stdout/print_error_messages", original_print_error_messages)
+	
 	if error != OK:
-		print("Failed to create client: ", error)
+		print("Failed to create client (Error code: ", error, ")")
 		return false
 	
 	multiplayer.multiplayer_peer = peer
@@ -82,8 +118,9 @@ func join_game(client_name: String, address: String, port: int = DEFAULT_PORT) -
 	}
 	
 	session_active = true
+	is_connecting = true
+	connection_timeout = 0.0
 	
-	print("Attempting to connect to ", address, ":", port)
 	return true
 
 # DISCONNECT
@@ -133,6 +170,7 @@ func _on_player_disconnected(id: int):
 
 func _on_connected_to_server():
 	print("Successfully connected to server!")
+	is_connecting = false  # Stop timeout tracking
 	local_player_id = multiplayer.get_unique_id()
 	
 	# Get stored player info
@@ -148,8 +186,16 @@ func _on_connected_to_server():
 
 func _on_connection_failed():
 	print("Failed to connect to server")
-	multiplayer.multiplayer_peer = null
+	is_connecting = false
+	
+	if multiplayer.multiplayer_peer:
+		multiplayer.multiplayer_peer.close()
+		multiplayer.multiplayer_peer = null
+	
+	players.clear()
 	session_active = false
+	
+	connection_failed.emit()
 
 func _on_server_disconnected():
 	print("Server disconnected")
@@ -178,11 +224,25 @@ func register_player(id: int, player_info: Dictionary):
 	player_connected.emit(id, player_info)
 	announce_player_joined.rpc(id, player_info)
 
-# Server sends full player list to a client
+# Server sends full player list to a client (or all clients)
 @rpc("authority", "reliable")
 func sync_players(all_players: Dictionary):
-	players = all_players
-	print("Received player list: ", players.keys())
+	# Merge incoming players with existing ones
+	for peer_id in all_players.keys():
+		players[peer_id] = all_players[peer_id]
+	
+	# Remove players that are no longer in the server's list
+	var peers_to_remove = []
+	for peer_id in players.keys():
+		if not all_players.has(peer_id):
+			peers_to_remove.append(peer_id)
+	
+	for peer_id in peers_to_remove:
+		players.erase(peer_id)
+	
+	# Debug output only on first sync or when count changes
+	if players.size() != all_players.size():
+		print("Player list synced: ", players.keys())
 
 # Server announces new player to all clients
 @rpc("authority", "reliable")
@@ -213,6 +273,17 @@ func set_player_ready(peer_id: int, is_ready: bool):
 	if players.has(peer_id):
 		players[peer_id]["ready"] = is_ready
 		print(players[peer_id]["name"], " is ", "ready" if is_ready else "not ready")
+		
+		# If we're the server, broadcast to all clients
+		if is_server():
+			sync_ready_state.rpc(peer_id, is_ready)
+
+# Server broadcasts ready state changes to all clients
+@rpc("authority", "reliable")
+func sync_ready_state(peer_id: int, is_ready: bool):
+	if players.has(peer_id):
+		players[peer_id]["ready"] = is_ready
+		print("Synced ready state: ", players[peer_id]["name"], " is ", "ready" if is_ready else "not ready")
 
 # Server starts the race
 @rpc("authority", "call_local", "reliable")
@@ -256,7 +327,7 @@ func spawn_player_car(peer_id: int, car_scene_path: String, spawn_pos: Vector2, 
 	# Add multiplayer wrapper if it doesn't have one
 	var wrapper = car.get_node_or_null("MultiplayerCarWrapper")
 	if not wrapper:
-		wrapper = preload("res://scripts/systems/MultiPlayerCarWrapper.gd").new()
+		wrapper = preload("res://scripts/systems/MultiplayerCarWrapper.gd").new()
 		wrapper.name = "MultiplayerCarWrapper"
 		car.add_child(wrapper)
 	

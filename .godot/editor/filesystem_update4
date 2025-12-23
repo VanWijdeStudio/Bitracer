@@ -1,3 +1,2 @@
-res://scripts/systems/MultiPlayerCarWrapper.gd
-res://scripts/systems/Car_Spawner.gd
+res://scripts/systems/Lobby.gd
 res://scripts/systems/GameManager.gd

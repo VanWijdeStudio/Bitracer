@@ -14,6 +14,14 @@ extends Control
 
 var in_lobby := false
 
+# Store original colors for validation
+var original_name_color: Color
+var original_ip_color: Color
+
+# Track if validation is in progress
+var validating_name := false
+var validating_ip := false
+
 func _ready():
 	print("=== LOBBY READY ===")
 	print("GameManager.session_active: ", GameManager.session_active)
@@ -31,6 +39,16 @@ func _ready():
 	if not _check_nodes():
 		push_error("Lobby UI nodes missing! Check scene structure.")
 		return
+	
+	# Store original colors
+	if player_name_input:
+		original_name_color = player_name_input.get_theme_color("font_color", "LineEdit")
+	if ip_input:
+		original_ip_color = ip_input.get_theme_color("font_color", "LineEdit")
+	
+	# Pre-fill server address for convenience
+	if ip_input:
+		ip_input.placeholder_text = "yourdomain.com or IP address"
 	
 	# Connect signals
 	if host_button:
@@ -51,8 +69,14 @@ func _ready():
 	GameManager.player_connected.connect(_on_player_connected)
 	GameManager.player_disconnected.connect(_on_player_disconnected)
 	GameManager.server_disconnected.connect(_on_server_disconnected)
+	GameManager.connection_failed.connect(_on_connection_failed_signal)
 	
 	_update_ui()
+
+func _process(_delta):
+	# Continuously refresh player list while in lobby
+	if in_lobby:
+		_refresh_player_list()
 
 func _check_nodes() -> bool:
 	var required = [player_name_input, host_button, join_button, ip_input, 
@@ -62,10 +86,82 @@ func _check_nodes() -> bool:
 			return false
 	return true
 
+func _validate_name_input() -> bool:
+	if not player_name_input:
+		return false
+	
+	# Block if already validating
+	if validating_name:
+		return false
+	
+	var name_text = player_name_input.text.strip_edges()
+	
+	# Check if empty
+	if name_text.is_empty():
+		validating_name = true
+		player_name_input.text = "Please input name first"
+		player_name_input.add_theme_color_override("font_color", Color.RED)
+		player_name_input.editable = false
+		# Clear after a moment and restore
+		await get_tree().create_timer(1.5).timeout
+		if player_name_input:
+			player_name_input.text = ""
+			player_name_input.add_theme_color_override("font_color", original_name_color)
+			player_name_input.editable = true
+		validating_name = false
+		return false
+	
+	# Check if name is taken (only when joining)
+	if GameManager.session_active:
+		for player in GameManager.players.values():
+			if player["name"].to_lower() == name_text.to_lower():
+				validating_name = true
+				var original_text = player_name_input.text
+				player_name_input.text = "Name already taken!"
+				player_name_input.add_theme_color_override("font_color", Color.RED)
+				player_name_input.editable = false
+				await get_tree().create_timer(1.5).timeout
+				if player_name_input:
+					player_name_input.text = original_text
+					player_name_input.add_theme_color_override("font_color", original_name_color)
+					player_name_input.editable = true
+				validating_name = false
+				return false
+	
+	return true
+
+func _validate_ip_input() -> bool:
+	if not ip_input:
+		return false
+	
+	# Block if already validating
+	if validating_ip:
+		return false
+	
+	var ip_text = ip_input.text.strip_edges()
+	
+	if ip_text.is_empty():
+		validating_ip = true
+		ip_input.text = "Please input IP first"
+		ip_input.add_theme_color_override("font_color", Color.RED)
+		ip_input.editable = false
+		# Clear after a moment and restore
+		await get_tree().create_timer(1.5).timeout
+		if ip_input:
+			ip_input.text = ""
+			ip_input.add_theme_color_override("font_color", original_ip_color)
+			ip_input.editable = true
+		validating_ip = false
+		return false
+	
+	return true
+
 func _on_host_pressed():
-	var player_name = player_name_input.text if player_name_input else "Host"
-	if player_name.strip_edges().is_empty():
-		player_name = "Host"
+	# Validate name
+	if not await _validate_name_input():
+		return
+	
+	var player_name = player_name_input.text.strip_edges()
 	
 	print("Hosting game with name: ", player_name)
 	if GameManager.host_game(player_name):
@@ -77,21 +173,36 @@ func _on_host_pressed():
 		print("Host failed!")
 
 func _on_join_pressed():
-	var player_name = player_name_input.text if player_name_input else "Player"
-	if player_name.strip_edges().is_empty():
-		player_name = "Player"
+	# Validate name
+	if not await _validate_name_input():
+		return
 	
-	var address = ip_input.text if ip_input else "127.0.0.1"
-	if address.strip_edges().is_empty():
-		address = "127.0.0.1"
+	# Validate IP
+	if not await _validate_ip_input():
+		return
+	
+	var player_name = player_name_input.text.strip_edges()
+	var address = ip_input.text.strip_edges()
 	
 	print("Joining game at ", address, " with name: ", player_name)
+	
+	# Show "Connecting..." status
+	if ip_input:
+		ip_input.text = "Connecting..."
+		ip_input.add_theme_color_override("font_color", Color.YELLOW)
+		ip_input.editable = false
+	
 	if GameManager.join_game(player_name, address):
-		in_lobby = true
-		_update_ui()
+		# Wait for either success or failure
+		# The connection_failed signal will restore the UI if it fails
 		print("Join initiated...")
 	else:
-		print("Join failed!")
+		print("Join failed immediately!")
+		# Restore IP input
+		if ip_input:
+			ip_input.text = address
+			ip_input.add_theme_color_override("font_color", original_ip_color)
+			ip_input.editable = true
 
 func _on_select_car_pressed():
 	print("Going to car selector (session will persist)")
@@ -112,7 +223,11 @@ func _on_ready_pressed():
 		var is_ready = !local_player["ready"]
 		print("Setting ready state to: ", is_ready)
 		GameManager.set_player_ready.rpc(GameManager.local_player_id, is_ready)
+		
+		# Immediately update local state for instant feedback
+		local_player["ready"] = is_ready
 		_update_ready_button()
+		_refresh_player_list()
 
 func _on_start_pressed():
 	if not GameManager.is_server():
@@ -154,6 +269,17 @@ func _on_back_pressed():
 
 func _on_player_connected(_peer_id: int, _player_info: Dictionary):
 	print("Player connected event received")
+	
+	# If we just connected to a server, enter lobby mode
+	if not in_lobby and GameManager.session_active:
+		in_lobby = true
+		_update_ui()
+		
+		# Restore IP input color
+		if ip_input:
+			ip_input.add_theme_color_override("font_color", original_ip_color)
+			ip_input.editable = true
+	
 	_refresh_player_list()
 
 func _on_player_disconnected(_peer_id: int):
@@ -165,6 +291,26 @@ func _on_server_disconnected():
 	in_lobby = false
 	GameGlobals.is_multiplayer = false
 	_update_ui()
+
+func _on_connection_failed_signal():
+	print("Connection failed - showing error to user")
+	in_lobby = false
+	GameGlobals.is_multiplayer = false
+	_update_ui()
+	
+	# Show error message in IP field
+	if ip_input:
+		var failed_address = ip_input.text
+		ip_input.text = "No lobby found"
+		ip_input.add_theme_color_override("font_color", Color.RED)
+		ip_input.editable = false
+		
+		await get_tree().create_timer(2.0).timeout
+		
+		if ip_input:
+			ip_input.text = failed_address
+			ip_input.add_theme_color_override("font_color", original_ip_color)
+			ip_input.editable = true
 
 func _update_ui():
 	print("Updating UI - in_lobby: ", in_lobby)
