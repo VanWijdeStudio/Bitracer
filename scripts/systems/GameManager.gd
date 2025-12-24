@@ -48,7 +48,8 @@ func _ready():
 
 func _process(delta):
 	# Server periodically syncs player list to all clients
-	if is_server() and session_active:
+	# IMPORTANT: Only run if we have an active multiplayer peer
+	if session_active and multiplayer.has_multiplayer_peer() and is_server():
 		sync_timer += delta
 		if sync_timer >= SYNC_INTERVAL:
 			sync_timer = 0.0
@@ -144,6 +145,8 @@ func disconnect_from_game():
 
 # Check if this peer is the server
 func is_server() -> bool:
+	if not multiplayer.has_multiplayer_peer():
+		return false
 	return multiplayer.is_server()
 
 # Get local player info
