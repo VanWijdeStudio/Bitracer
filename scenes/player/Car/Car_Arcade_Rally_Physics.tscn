@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://lbwubq1vto2v" path="res://scripts/player/Car/Rally_physics.gd" id="1_23y0a"]
 [ext_resource type="Texture2D" uid="uid://cnyvcnk00glu1" path="res://Assets/vehicles/cars/car_blue_small_4.png" id="2_m1l57"]
 [ext_resource type="PackedScene" uid="uid://c2d4wgcvs1nwq" path="res://scenes/player/Camera's.tscn" id="3_4tqho"]
-[ext_resource type="Script" uid="uid://btgc7mhi2e537" path="res://scripts/systems/MultiPlayerCarWrapper.gd" id="4_rg42r"]
+[ext_resource type="Script" uid="uid://btgc7mhi2e537" path="res://scripts/systems/MultiplayerCarWrapper.gd" id="4_rg42r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxlh8"]
 size = Vector2(30, 32)

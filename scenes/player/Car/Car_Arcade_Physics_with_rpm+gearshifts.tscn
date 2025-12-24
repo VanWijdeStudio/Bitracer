@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bmathndj7fgi1" path="res://Assets/sounds/Sound effects/Engine/engine-47745.mp3" id="3_b2gg3"]
 [ext_resource type="FontFile" uid="uid://bt7bwpk5kweam" path="res://Assets/ui/fonts/PressStart2P-Regular.ttf" id="3_vg5ro"]
 [ext_resource type="PackedScene" uid="uid://c2d4wgcvs1nwq" path="res://scenes/player/Camera's.tscn" id="5_ddl2e"]
-[ext_resource type="Script" uid="uid://btgc7mhi2e537" path="res://scripts/systems/MultiPlayerCarWrapper.gd" id="6_0w3no"]
+[ext_resource type="Script" uid="uid://btgc7mhi2e537" path="res://scripts/systems/MultiplayerCarWrapper.gd" id="6_0w3no"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2gg3"]
 size = Vector2(30, 32)
