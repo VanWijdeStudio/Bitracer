@@ -15,6 +15,12 @@ const CARS := [
 		"path": "res://scenes/player/Car/Car_Arcade_Rally_Physics.tscn",
 		"description": "This fucker is quite shit"
 	},
+	{
+		"category": "Karts",
+		"name": "Custom kart",
+		"path": "res://scenes/player/Car/GoKart.tscn",
+		"description": "Its one hell of a go kart"
+	},
 ]
 
 # Folder to auto-scan for modded cars
