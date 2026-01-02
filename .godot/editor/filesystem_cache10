@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1766926719
+::res://::1766955845
 export_presets.cfg::TextFile::-1::1766772538::0::1::::<><><>0<>0<><>::
 Icon.svg::CompressedTexture2D::8107707766876378206::1765746199::1765826715::1::::<><><>0<>0<>211035967000fd77194f98a753c83990<>res://.godot/imported/Icon.svg-209197100d5fe6cba9c168636c60b76c.ctex::
 LICENSE.md::TextFile::-1::1763927551::0::1::::<><><>0<>0<><>::
@@ -601,10 +601,10 @@ LapTimerUI.tscn::PackedScene::4322706716807921179::1765224682::0::1::::<><><>0<>
 ::res://scripts/player/Camera/::1766775438
 camera_controller.gd::GDScript::8574877010157236332::1764620062::0::1::::<>Node2D<><>0<>0<><>::
 car_camera_something.gd::GDScript::2733919479164603238::1765578078::0::1::::<>Camera2D<><>0<>0<><>::
-::res://scripts/player/Car/::1766926546
+::res://scripts/player/Car/::1766927590
 Car1.gd::GDScript::8012130784019138373::1764616858::0::1::::<>Node2D<><>0<>0<><>::
 Car_With_Rpm.gd::GDScript::2142559481812017130::1765544188::0::1::::<>StaticBody2D<><>0<>0<><>::
-GoKart.gd::GDScript::3731373906650029216::1766926546::0::1::::<>StaticBody2D<><>0<>0<><>::
+GoKart.gd::GDScript::3731373906650029216::1766927590::0::1::::<>StaticBody2D<><>0<>0<><>::
 Rally_physics.gd::GDScript::775513225941744907::1764529282::0::1::::<>RigidBody2D<><>0<>0<><>::
 ::res://scripts/systems/::1766606175
 Car_Spawner.gd::GDScript::5956815646080258736::1766487043::0::1::::<>Node2D<><>0<>0<><>::
@@ -614,7 +614,7 @@ LapTracker.gd::GDScript::1974359438375780011::1766422401::0::1::::<>Area2D<><>0<
 Lobby.gd::GDScript::2897856057539518372::1766596026::0::1::::<>Control<><>0<>0<><>::
 MainMenu.gd::GDScript::7069591451186190467::1766606175::0::1::::<>Control<><>0<>0<><>::
 MultiplayerCarWrapper.gd::GDScript::3732574200224154592::1766486844::0::1::::<>Node<><>0<>0<><>::
-::res://scripts/ui/::1766926693
-CarSelector.gd::GDScript::5925391095253557161::1766926693::0::1::::<>Control<><>0<>0<><>::
+::res://scripts/ui/::1766926842
+CarSelector.gd::GDScript::5925391095253557161::1766926842::0::1::::<>Control<><>0<>0<><>::
 LapTimerUI.gd::GDScript::3952084060139117559::1765224275::0::1::::<>CanvasLayer<><>0<>0<><>::
 Track_selector.gd::GDScript::2045670338530319710::1766428261::0::1::::<>Control<><>0<>0<><>::
