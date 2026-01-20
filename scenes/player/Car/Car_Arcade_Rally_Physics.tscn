@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c2d4wgcvs1nwq" path="res://scenes/player/Camera's.tscn" id="3_4tqho"]
 [ext_resource type="Script" uid="uid://btgc7mhi2e537" path="res://scripts/systems/MultiplayerCarWrapper.gd" id="4_rg42r"]
 [ext_resource type="FontFile" uid="uid://bt7bwpk5kweam" path="res://Assets/ui/fonts/PressStart2P-Regular.ttf" id="5_jbswb"]
-[ext_resource type="AudioStream" uid="uid://bmathndj7fgi1" path="res://Assets/sounds/Sound effects/Engine/engine-47745.mp3" id="6_yy3nq"]
+[ext_resource type="AudioStream" uid="uid://b7xkr3k1k2pgp" path="res://Assets/sounds/Sound effects/Engine/rally-car-idle-loop-17-84405.mp3" id="6_jbswb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxlh8"]
 size = Vector2(18, 31)
@@ -17,11 +17,18 @@ size = Vector2(18, 31)
 gravity_scale = 0.0
 script = ExtResource("1_23y0a")
 
+[node name="Dirt_particles1" type="CPUParticles2D" parent="."]
+position = Vector2(-8, 7)
+emitting = false
+
+[node name="Dirt_particles2" type="CPUParticles2D" parent="."]
+position = Vector2(8, 7)
+emitting = false
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jbswb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_lxlh8")
 
@@ -80,8 +87,7 @@ vertical_alignment = 2
 
 [node name="EngineSound" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("6_yy3nq")
-volume_db = -8.0
+stream = ExtResource("6_jbswb")
 autoplay = true
 parameters/looping = true
 
