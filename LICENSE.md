@@ -1,6 +1,6 @@
 BitRacer License
 
-Copyright (c) 2025 VanWijdeStudio
+Copyright (c) 2026 SandSlide Studio
 
 All rights reserved.
 
